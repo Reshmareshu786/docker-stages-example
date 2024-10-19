@@ -1,4 +1,4 @@
-This repository contains two Docker examples demonstrating different build approaches:
+# This repository contains two Docker examples demonstrating different build approaches:
 
 1. **Multi-Stage Build**: Demonstrates how to create a smaller Docker image by separating the build environment from the runtime environment.
 
