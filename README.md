@@ -4,7 +4,6 @@ This repository contains two Docker examples demonstrating different build appro
 
 2. **Single-Stage Build**: Illustrates a straightforward approach where the build and runtime are combined into a single Docker image.
 
-## Usage
 
 
 ***
