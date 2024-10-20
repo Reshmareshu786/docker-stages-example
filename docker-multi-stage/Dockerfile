@@ -24,4 +24,4 @@ FROM scratch
 COPY --from=build /app /app
 
 # Set the entrypoint for the container to run the binary
-ENTRYPOINT["/app"]
+ENTRYPOINT ["/app"]
