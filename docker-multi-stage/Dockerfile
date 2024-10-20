@@ -1,34 +1,34 @@
 ################################
-# BASE IMAGE
-###############################
+# BASE IMAGE FOR BUILD STAGE
+################################
 
 FROM ubuntu AS build
 
-# Update package lists and install necessary packages
-RUN apt-get update && apt-get install -y golang-go ca-certificates
+# Install dependencies
+RUN apt-get update && apt-get install -y golang-go
 
-# Ensure the CA certificates are up to date
-RUN update-ca-certificates
-
-# Turn off Go modules
+# Set environment variable to disable module support
 ENV GO111MODULE=off
 
-# Copy the current directory into the Docker image
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Go source code into the container
 COPY . .
 
-# Build the Go binary
-RUN CGO_ENABLED=0 go build -o /app ./main.go
-
+# Build the Go application
+RUN CGO_ENABLED=0 go build -o myapp .
 
 ######################################
-# MULTI STAGE BUILD
+# FINAL STAGE
 ######################################
 
 FROM scratch
 
 # Copy the compiled binary from the build stage
-COPY --from=build /app /app
+COPY --from=build /app/myapp /app/myapp
 
 # Set the entrypoint for the container to run the binary
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["/app/myapp"]
+
 
