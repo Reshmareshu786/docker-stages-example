@@ -9,11 +9,18 @@ import (
 )
 
 func main() {
-	fmt.Println("Hi Abhishek.Veeramalla, I am a calculator app ....")
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Hi, what is your name? ")
+	username, _ := reader.ReadString('\n')
+
+	// Trim the newline character from the username
+	username = strings.TrimSpace(username)
+
+	// Greet the user with their name
+	fmt.Printf("Hi %s, I am a calculator app ....\n", username)
 
 	for {
 		// Read input from the user
-		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter any calculation (Example: 1 + 2 (or) 2 * 5 -> Please maintain spaces as shown in example): ")
 		text, _ := reader.ReadString('\n')
 
@@ -22,10 +29,11 @@ func main() {
 
 		// Check if the user entered "exit" to quit the program
 		if text == "exit" {
+			fmt.Printf("Goodbye, %s!\n", username)
 			break
 		}
 
-		// Split the input into two parts: the left operand and the right operand
+		// Split the input into parts: the left operand, the operator, and the right operand
 		parts := strings.Split(text, " ")
 		if len(parts) != 3 {
 			fmt.Println("Invalid input. Try again.")
@@ -54,6 +62,10 @@ func main() {
 		case "*":
 			result = left * right
 		case "/":
+			if right == 0 {
+				fmt.Println("Cannot divide by zero. Try again.")
+				continue
+			}
 			result = left / right
 		default:
 			fmt.Println("Invalid operator. Try again.")
@@ -61,6 +73,6 @@ func main() {
 		}
 
 		// Print the result
-		fmt.Printf("Result: %d\n", result)
+		fmt.Printf("%s, the result is: %d\n", username, result)
 	}
 }
