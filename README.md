@@ -29,6 +29,6 @@
    docker run -it my-single-stage-app
 
 # Conclusion 
-This repository helps you understand the differences between multi-stage and single-stage Docker builds. Each approach has its own benefits, and you can explore them through the provided examples.
+This repository helps understand the differences between multi-stage and single-stage Docker builds. Each approach has its own benefits, and you can explore them through the provided examples.
 
 
